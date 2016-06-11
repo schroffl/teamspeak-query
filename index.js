@@ -120,7 +120,7 @@ class TeamspeakQuery extends EventEmitter {
 	 *                       if parsing fails.
 	 */
 	static parse(str) {
-		let parsed = str.match(/(^error|^notify(\w+)|\w+=[^\s\|]+)/gi);
+		let parsed = str.match(/(^error|^notify\w+|\w+=[^\s\|]+)/gi);
 
 		if(parsed) {
 			let resType = parsed[0].indexOf('=') === -1 ? parsed.shift() : null, // Only shift if the server responds with 'error' or 'notify'
@@ -168,7 +168,7 @@ class TeamspeakQuery extends EventEmitter {
 	 * @static
 	 *
 	 * @param      {string}  str     The string
-	 * @return     {string}  { description_of_the_return_value }
+	 * @return     {string}  The unescaped string
 	 */
 	static unescape(str) {
 		return String(str).replace(/\\\\/g, '\\')
