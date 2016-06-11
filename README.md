@@ -23,7 +23,8 @@ query.on('cliententerview', data =>
 ```
 
 ## Constructor
-The constructor takes 3 parameters
+The constructor takes 3 parameters  
+
 | Name    | Default     | Description                                     |
 | ------- | ----------- | ----------------------------------------------- |
 | host    | `127.0.0.1` | The ip of the server                            |
