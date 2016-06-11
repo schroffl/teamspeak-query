@@ -14,11 +14,12 @@ class TeamspeakQuery extends EventEmitter {
 	 *
 	 * @param      {String}  [host=127.0.0.1]  The IP of your teamspeak server
 	 * @param      {Number}  [port=10011]      The port of your teamspeak server
+	 * @param      {Object}  [options=Object]  Options for the socket
 	 */
-	constructor(host, port) {
+	constructor(host, port, options) {
 		super();
 
-		let sock = this.sock = new net.Socket();
+		let sock = this.sock = new net.Socket(options || { });
 
 		this.queue = [ ];
 		this._current = null;
