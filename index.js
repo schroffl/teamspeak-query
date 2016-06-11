@@ -39,21 +39,21 @@ class TeamspeakQuery extends EventEmitter {
 	/**
 	 * Send a command to the server
 	 *
-	 * @param      {String}   cmd      The command to execute
-	 * @param      {Object}   options  Options or flags for the command
+	 * @param      {String}   cmd     The command to execute
+	 * @param      {Object}   params  Options or flags for the command
 	 * @return     {Promise}  Promise resolves if the command executes
 	 *                        successfully, rejects if an error code is
 	 *                        returned.
 	 */
-	send(cmd, options) {
+	send(cmd, params) {
 		let cmdStringParts = [ cmd ],
 			flags = Array.from(arguments).slice(2);
 
-		if(options && type(options) !== 'object') 
-			flags.unshift(options);
+		if(params && type(params) !== 'object') 
+			flags.unshift(params);
 		else {
-			for(let key in options) {
-				var val = options[key];
+			for(let key in params) {
+				var val = params[key];
 
 				if(type(val) === 'array') {
 					val = val.map(v => TeamspeakQuery.escape(key) + '=' + TeamspeakQuery.escape(v) ).join('|');
