@@ -1,16 +1,14 @@
 'use strict';
 
 const TeamspeakQuery = require('../index');
+const query = new TeamspeakQuery(process.argv[4] || '127.0.0.1', process.argv[5] || 10011);
 
-let test = new TeamspeakQuery('127.0.0.1', 10011);
+query.send('login', process.argv[2], process.argv[3])
+	.then(() => query.send('use', 1))
+	.then(() => query.send('servernotifyregister', { 'event': 'server' }))
+	.then(() => console.log('Done! Everything went fine'))
+	.catch(err => console.error('An error occured:', err));
 
-test.send('login', process.argv[2], process.argv[3]) // Login 
-	.then(() => test.send('use', { 'sid': 1 })) // Set the virtual server
-	.then(() => test.send('servernotifyregister', { 'event': 'server' })) // Notify me on any events
-	.then(() => test.send('clientlist', '-uid')) // List all clients and their unique ids
-	.then(console.log) // Log the response of the last command (clientlist)
-	.catch(console.error); // Log any errors
-
-// Log a clients nickname on connection
-test.on('cliententerview', data =>
+// After teamspeak has processed 'servernotifyregister' we will get notified about any connections
+query.on('cliententerview', data =>
 	console.log(data.client_nickname, 'connected') );
