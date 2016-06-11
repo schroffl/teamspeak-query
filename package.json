@@ -1,7 +1,7 @@
 {
   "name": "teamspeak-query",
   "version": "0.1.0",
-  "description": "",
+  "description": "Teamspeak-ServerQuery library",
   "main": "index.js",
   "directories": {
     "test": "test"
