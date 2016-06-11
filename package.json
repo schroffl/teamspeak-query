@@ -1,0 +1,33 @@
+{
+  "name": "teamspeak-query",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/schroffl/teamspeak-query.git"
+  },
+  "keywords": [
+    "teamspeak",
+    "query"
+  ],
+  "author": "schroffl",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/schroffl/teamspeak-query/issues"
+  },
+  "homepage": "https://github.com/schroffl/teamspeak-query#readme",
+  "dependencies": {
+    "carrier": "^0.3.0",
+    "type-of": "^2.0.1"
+  },
+  "devDependencies": {
+    "jsdoc": "^3.4.0"
+  }
+}
