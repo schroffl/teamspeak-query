@@ -1,7 +1,7 @@
 'use strict';
 
 const net = require('net'),
-	  EventEmitter = require('events').EventEmitter,
+	  EventEmitter = require('eventemitter2'),
 	  type = require('type-of'),
 	  carrier = require('carrier');
 

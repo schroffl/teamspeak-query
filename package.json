@@ -25,6 +25,7 @@
   "homepage": "https://github.com/schroffl/teamspeak-query#readme",
   "dependencies": {
     "carrier": "^0.3.0",
+    "eventemitter2": "^1.0.3",
     "type-of": "^2.0.1"
   },
   "devDependencies": {
