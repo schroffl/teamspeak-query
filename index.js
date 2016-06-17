@@ -116,6 +116,8 @@ class TeamspeakQuery extends EventEmitter {
 					params[v[0]] = v[1];
 			});
 
+			params.raw = str;
+
 			return { 'type': resType, params };
 
 		} else
