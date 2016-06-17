@@ -39,35 +39,14 @@ class TeamspeakQuery extends EventEmitter {
 	/**
 	 * Send a command to the server
 	 *
-	 * @param      {String}   cmd     The command to execute
-	 * @param      {Object}   params  Options or flags for the command
 	 * @return     {Promise}  Promise resolves if the command executes
 	 *                        successfully, rejects if an error code is
 	 *                        returned.
 	 */
-	send(cmd, params) {
-		let cmdStringParts = [ cmd ],
-			flags = Array.from(arguments).slice(2);
-
-		if(params && type(params) !== 'object') 
-			flags.unshift(params);
-		else {
-			for(let key in params) {
-				var val = params[key];
-
-				if(type(val) === 'array') {
-					val = val.map(v => TeamspeakQuery.escape(key) + '=' + TeamspeakQuery.escape(v) ).join('|');
-					cmdStringParts.push(val);
-				} else
-					cmdStringParts.push( TeamspeakQuery.escape(key) + '=' + TeamspeakQuery.escape(val) );
-			}
-		}
-
-		flags = flags.map( TeamspeakQuery.escape );
-		cmdStringParts = cmdStringParts.concat(flags);
-
-		let promise = new Promise((resolve, reject) =>
-			this.queue.push({ 'cmd': cmdStringParts.join(' '), resolve, reject }) );
+	send() {
+		let cmdString = TeamspeakQuery.assembleCommandString.apply({ }, Array.from(arguments)),
+			promise = new Promise((resolve, reject) =>
+			this.queue.push({ 'cmd': cmdString, resolve, reject }) );
 
 		if(this._statusLines > 1) this.checkQueue();
 		return promise;
@@ -141,6 +120,35 @@ class TeamspeakQuery extends EventEmitter {
 
 		} else
 			return null;
+	}
+
+	/**
+	 * Converts the arguments into an according command string
+	 *
+	 * @return     {String}  The command string
+	 */
+	static assembleCommandString() {
+		let args = Array.from(arguments),
+			cmd = args.shift(),
+			cmdStringParts = [ cmd ];
+
+		args.forEach(arg => {
+			if(type(arg) === 'object') {
+				for(let key in arg) {
+					let val = arg[key];
+
+					if(type(val) === 'array')
+						val = val.map(v => TeamspeakQuery.escape(key) + '=' + TeamspeakQuery.escape(v) ).join('|');
+					else
+						val = TeamspeakQuery.escape(key) + '=' + TeamspeakQuery.escape(val);
+
+					cmdStringParts.push(val);
+				}
+			} else
+				cmdStringParts.push(arg);
+		});
+
+		return cmdStringParts.join(' ');
 	}
 
 	/**
