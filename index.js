@@ -25,8 +25,8 @@ class TeamspeakQuery extends EventEmitter {
 		this._current = null;
 		this._statusLines = 0;
 
-		host = host || '127.0.0.1'
-		port = port || 10011;
+		host = this.host = host || '127.0.0.1'
+		port = this.port = port || 10011;
 
 		sock.connect(port, host);
 
