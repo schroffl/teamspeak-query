@@ -1,9 +1,12 @@
 'use strict';
 
-const net = require('net'),
-	  EventEmitter = require('eventemitter2'),
-	  type = require('type-of'),
-	  carrier = require('carrier');
+const net = require('net');
+const EventEmitter = require('eventemitter2');
+
+const type = require('type-of');
+const carrier = require('carrier');
+
+const Throttle = require('./lib/throttle');
 
 class TeamspeakQuery extends EventEmitter {
 
@@ -27,6 +30,8 @@ class TeamspeakQuery extends EventEmitter {
 
 		host = this.host = host || '127.0.0.1'
 		port = this.port = port || 10011;
+
+		this.throttle = new Throttle({ 'max': 10, 'per': 3000, 'enable': host !== '127.0.0.1' && host !== 'localhost' });
 
 		sock.connect(port, host);
 
@@ -56,10 +61,12 @@ class TeamspeakQuery extends EventEmitter {
 	 * Checks the queue and runs the first command if nothing else is running
 	 */
 	checkQueue() {
-		if(!this._current && this.queue.length) {
-			this._current = this.queue.shift();
-			this.sock.write(this._current.cmd + '\n');
-		}
+		this.throttle.run(() => {
+			if(!this._current && this.queue.length) {
+				this._current = this.queue.shift();
+				this.sock.write(this._current.cmd + '\n');
+			}
+		});
 	}
 
 	/**
