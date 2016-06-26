@@ -39,7 +39,7 @@ The constructor takes 3 parameters
 Send a command to the server.  
 There are 2 ways (which can also be mixed) to specify parameters for the command:
 * **params**: An object, e.g. `{ 'parameter': 'value', 'x': 42 }`. Only works if the 2nd argument is an object.
-* **...flags**: Plain arguments passed to then function, e.g. `query.send('login', 'username', 'password')`.  
+* **...flags**: Plain arguments passed to the function, e.g. `query.send('login', 'username', 'password')`.  
 You can also use it to set flags, e.g. `query.send('clientlist', '-uid')`.
 
 #### TeamspeakQuery#parse(str)
