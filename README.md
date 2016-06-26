@@ -47,10 +47,10 @@ Parse the response of the server, returns an object that contains the type of th
 the parameters that were returned by the server.
 
 #### TeamspeakQuery#escape(str)
-Escape a string accordings to [the specification](http://media.teamspeak.com/ts3_literature/TeamSpeak%203%20Server%20Query%20Manual.pdf#page=5).
+Escape a string according to [the specification](http://media.teamspeak.com/ts3_literature/TeamSpeak%203%20Server%20Query%20Manual.pdf#page=5).
 
 #### TeamspeakQuery#unescape(str)
-Unescape a string accordings to [the specification](http://media.teamspeak.com/ts3_literature/TeamSpeak%203%20Server%20Query%20Manual.pdf#page=5).
+Unescape a string according to [the specification](http://media.teamspeak.com/ts3_literature/TeamSpeak%203%20Server%20Query%20Manual.pdf#page=5).
 
 ## Throttling
 Commands are being throttled by default if the host is not set to the local machine (`127.0.0.1` or `localhost`) in order to prevent a ban for flooding (see [Whitelisting and Blacklisting](http://media.teamspeak.com/ts3_literature/TeamSpeak%203%20Server%20Query%20Manual.pdf?#page=6) in the specs).  
