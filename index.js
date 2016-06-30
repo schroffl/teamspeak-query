@@ -114,7 +114,7 @@ class TeamspeakQuery extends EventEmitter {
 				params = { };
 
 			parsed.forEach(v => {
-				v = v.split(/=/).map(TeamspeakQuery.unescape);
+				v = v.split( v.indexOf('=') ).map(TeamspeakQuery.unescape);
 
 				if(v[0] in params) {
 					if(type(params[v[0]]) !== 'array') params[v[0]] = [ params[v[0]], v[1] ];
