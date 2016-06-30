@@ -202,5 +202,3 @@ class TeamspeakQuery extends EventEmitter {
 }
 
 module.exports = TeamspeakQuery;
-
-console.log( TeamspeakQuery.parse('error id=0 msg=ok') );
