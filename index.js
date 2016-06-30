@@ -114,7 +114,7 @@ class TeamspeakQuery extends EventEmitter {
 				params = { };
 
 			parsed.forEach(v => {
-				v = v.split( v.indexOf('=') ).map(TeamspeakQuery.unescape);
+				v = [ v.substring(0, v.indexOf('=') ), v.substring(v.indexOf('=') + 1) ].map(TeamspeakQuery.unescape);
 
 				if(v[0] in params) {
 					if(type(params[v[0]]) !== 'array') params[v[0]] = [ params[v[0]], v[1] ];
@@ -202,3 +202,5 @@ class TeamspeakQuery extends EventEmitter {
 }
 
 module.exports = TeamspeakQuery;
+
+console.log( TeamspeakQuery.parse('error id=0 msg=ok') );
