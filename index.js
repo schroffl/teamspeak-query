@@ -114,13 +114,17 @@ class TeamspeakQuery extends EventEmitter {
 				params = { };
 
 			parsed.forEach(v => {
-				v = [ v.substring(0, v.indexOf('=') ), v.substring(v.indexOf('=') + 1) ].map(TeamspeakQuery.unescape);
+				let index = v.indexOf('='),
+					key = v.substring(0, index),
+					value = TeamspeakQuery.unescape( v.substring(index + 1) );
 
-				if(v[0] in params) {
-					if(type(params[v[0]]) !== 'array') params[v[0]] = [ params[v[0]], v[1] ];
-					else params[v[0]].push(v[1]);
+				if(key in params) {
+					if(type(params[key]) !== 'array') 
+						params[key] = [ params[key], value ];
+					else
+						params[key].push(value);
 				} else
-					params[v[0]] = v[1];
+					params[key] = value;
 			});
 
 			params.raw = () => str;
