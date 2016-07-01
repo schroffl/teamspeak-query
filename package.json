@@ -29,6 +29,7 @@
     "type-of": "^2.0.1"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
     "jsdoc": "^3.4.0"
   }
 }
