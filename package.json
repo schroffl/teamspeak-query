@@ -3,11 +3,8 @@
   "version": "1.5.4",
   "description": "Teamspeak-ServerQuery library",
   "main": "index.js",
-  "directories": {
-    "test": "test"
-  },
   "scripts": {
-    "test": "node test/test.js"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
