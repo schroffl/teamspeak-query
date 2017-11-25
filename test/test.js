@@ -43,7 +43,7 @@ describe('TeamspeakQuery', () => {
   describe('#parse', () => {
     it('Should detect error- and notify-messages', () => {
       let notify = TeamspeakQuery.parse('notifytextmessage msg=text'),
-        error = TeamspeakQuery.parse('error id=0 msg=ok');
+          error = TeamspeakQuery.parse('error id=0 msg=ok');
 
       expect(notify.type).to.equal('notifytextmessage');
       expect(notify.params.msg).to.equal('text');
@@ -54,7 +54,7 @@ describe('TeamspeakQuery', () => {
 
     it('Should parse multiple values for the same key into an array', () => {
       let str = 'clid=1|clid=2',
-        parsed = TeamspeakQuery.parse(str);
+          parsed = TeamspeakQuery.parse(str);
 
       expect(parsed.type).to.equal(null);
       expect(parsed.params.clid).to.be.a('array');
@@ -62,7 +62,7 @@ describe('TeamspeakQuery', () => {
 
     it('Should not fail when an equal sign is in a parameter', () => {
       let str = 'notifytextmessage msg=x=y=z invokername=This\\s=\\smy\\pname',
-        parsed = TeamspeakQuery.parse(str);
+          parsed = TeamspeakQuery.parse(str);
 
       expect(parsed.type).to.equal('notifytextmessage');
       expect(parsed.params.msg).to.equal('x=y=z');
