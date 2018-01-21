@@ -36,15 +36,17 @@ The constructor takes 3 parameters
 
 ## Methods
 #### TeamspeakQuery.send(cmd, params?, ...flags?)
-Send a command to the server.  
-There are 2 ways (which can also be mixed) to specify parameters for the command:
+Sends a command to the server and returns a Promise that resolves to or rejects with the value returned by `TeamspeakQuery#parse`.
+There are 2 ways, which can also be mixed, to specify parameters for the command:
 * **params**: An object, e.g. `{ 'parameter': 'value', 'x': 42 }`.
-* **...flags**: Plain arguments passed to the function, e.g. `query.send('login', 'username', 'password')`.  
+* **flags**: Plain arguments passed to the function, e.g. `query.send('login', 'username', 'password')`.  
 You can also use it to set flags, e.g. `query.send('clientlist', '-uid')`.
 
+If you want your response to be an array, e.g. for commands like `clientlist`, take a look at [Issue #3](https://github.com/schroffl/teamspeak-query/issues/3#issuecomment-359252099).
+
 #### TeamspeakQuery#parse(str)
-Parse the response of the server, returns an object that contains the type of the response (error, notification, etc.) and 
-the parameters that were returned by the server.
+Parses a response string and returns an object that contains the type of the response (error, notification, etc.) together with its parameters.
+The `raw` function of the returned object can be called to acquire the plaintext that was passed to the function.
 
 #### TeamspeakQuery#escape(str)
 Escape a string according to [the specification](http://media.teamspeak.com/ts3_literature/TeamSpeak%203%20Server%20Query%20Manual.pdf#page=5).
