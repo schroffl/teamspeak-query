@@ -1,6 +1,6 @@
 {
   "name": "teamspeak-query",
-  "version": "1.5.5",
+  "version": "2.0.0",
   "description": "Teamspeak-ServerQuery library",
   "main": "index.js",
   "scripts": {
