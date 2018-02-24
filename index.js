@@ -17,20 +17,28 @@ class TeamspeakQuery extends EventEmitter {
    *
    * @param      {String}  [host=127.0.0.1]  The IP of your teamspeak server
    * @param      {Number}  [port=10011]      The port of your teamspeak server
-   * @param      {Object}  [options=Object]  Options for the socket
+   * @param      {Object}  [options={}]      Passed to net.Socket.connect
    */
   constructor(host, port, options) {
     super();
 
-    let sock = this.sock = new net.Socket(options || { });
+    let sock = this.sock = new net.Socket(),
+        connectOptions = Object.assign({ }, options, {
+          'host': '127.0.0.1',
+          'port': 10011
+        }, { host, port });
 
     this.queue = [ ];
     this._current = null;
     this._statusLines = 0;
 
-    this.throttle = new Throttle({ 'max': 10, 'per': 3000, 'enable': host !== '127.0.0.1' && host !== 'localhost' });
+    this.throttle = new Throttle({
+      'max': 10,
+      'per': 3000,
+      'enable': connectOptions.host !== '127.0.0.1' && connectOptions.host !== 'localhost'
+    });
 
-    sock.connect(port, host);
+    sock.connect(connectOptions);
 
     sock.on('connect', () => {
       this.carrier = carrier.carry(sock);

@@ -23,13 +23,13 @@ query.on('cliententerview', data =>
 ```
 
 ## Constructor
-The constructor takes 3 parameters  
+The constructor takes 3 parameters. If you want to make use of the `connect` options you have to specify host and port.
 
 | Name    | Default     | Description                                     |
 | ------- | ----------- | ----------------------------------------------- |
 | host    | `127.0.0.1` | The ip of the server                            |
 | port    | `10011`     | The query port of the server                    |
-| options | `{ }`       | Any options that should be passed to the socket |
+| options | `{ }`       | Any options that should be passed to [`net.Socket.connect`](https://nodejs.org/api/net.html#net_socket_connect_options_connectlistener) |
 
 **INFO**: The raw socket can be accessed via the instance's `sock` property.
 
