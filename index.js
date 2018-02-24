@@ -28,9 +28,6 @@ class TeamspeakQuery extends EventEmitter {
     this._current = null;
     this._statusLines = 0;
 
-    host = this.host = host || '127.0.0.1'
-    port = this.port = port || 10011;
-
     this.throttle = new Throttle({ 'max': 10, 'per': 3000, 'enable': host !== '127.0.0.1' && host !== 'localhost' });
 
     sock.connect(port, host);
