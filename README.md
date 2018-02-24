@@ -36,7 +36,7 @@ The constructor takes 3 parameters. If you want to make use of the `connect` opt
 
 ## Methods
 #### TeamspeakQuery.send(cmd, params?, ...flags?)
-Sends a command to the server and returns a Promise that resolves to or rejects with the value returned by `TeamspeakQuery#parse`.  
+Sends a command to the server and returns a Promise that resolves to or rejects with the value returned by `TeamspeakQuery#parse`.
 
 There are 2 ways, which can also be mixed, to specify parameters for the command:
 * **params**: An object, e.g. `{ 'parameter': 'value', 'x': 42 }`.
