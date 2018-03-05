@@ -32,6 +32,9 @@ class TeamspeakQuery extends EventEmitter {
     this._current = null;
     this._statusLines = 0;
 
+    this.host = connectOptions.host;
+    this.port = connectOptions.port;
+
     this.throttle = new Throttle({
       'max': 10,
       'per': 3000,
