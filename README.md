@@ -47,6 +47,6 @@ You can also use it to set flags, e.g. `query.send('clientlist', '-uid')`.
 If you want your response to be an array, e.g. for commands like `clientlist`, take a look at [Issue #3](https://github.com/schroffl/teamspeak-query/issues/3#issuecomment-359252099).
 
 ## Throttling
-Commands are being throttled by default if the host is not set to the local machine (`127.0.0.1` or `localhost`) in order to prevent a ban for flooding (see [Whitelisting and Blacklisting](http://media.teamspeak.com/ts3_literature/TeamSpeak%203%20Server%20Query%20Manual.pdf?#page=6) in the specs).  
+Commands are being throttled by default if the host is not set to the local machine (`127.0.0.1` or `localhost`) in order to prevent a ban for flooding (see [Whitelisting and Blacklisting](http://media.teamspeak.com/ts3_literature/TeamSpeak%203%20Server%20Query%20Manual.pdf?#page=6) on page 6 in the specs).  
 The instance of [lib/throttle.js](lib/throttle.js) can be accessed via `TeamspeakQuery.throttle`.  
 If you want to disable throttling, you can do it like this: `TeamspeakQuery.throttle.set('enable', false)`.
