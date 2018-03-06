@@ -6,6 +6,9 @@ A small library which exposes an API to talk to your Teamspeak-Server via the [T
 $ npm install teamspeak-query
 ```
 
+# Upgrading
+If you are upgrading to a newer version of `teamspeak-query`, take a look at [the changelog](https://github.com/schroffl/teamspeak-query/releases) to find out what needs to be done on your side. I will try to keep this process as simple as possible.
+
 # Example
 ```javascript
 const TeamspeakQuery = require('teamspeak-query');
