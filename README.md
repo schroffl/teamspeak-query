@@ -1,15 +1,15 @@
 # teamspeak-query [![npm version](https://badge.fury.io/js/teamspeak-query.svg)](https://badge.fury.io/js/teamspeak-query)
 A small library which exposes an API to talk to your Teamspeak-Server via the [Teamspeak-ServerQuery](http://media.teamspeak.com/ts3_literature/TeamSpeak%203%20Server%20Query%20Manual.pdf)
 
-# Installation
+## Installation
 ```shell
 $ npm install teamspeak-query
 ```
 
-# Upgrading
+## Upgrading
 If you are upgrading to a newer version of `teamspeak-query`, take a look at [the changelog](https://github.com/schroffl/teamspeak-query/releases) to find out what needs to be done on your side. I will try to keep this process as simple as possible.
 
-# Example
+## Example
 ```javascript
 const TeamspeakQuery = require('teamspeak-query');
 const query = new TeamspeakQuery('127.0.0.1', 10011);
