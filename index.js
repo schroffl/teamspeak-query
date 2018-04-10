@@ -7,6 +7,7 @@ const type = require('type-of');
 const carrier = require('carrier');
 
 const Throttle = require('./lib/throttle');
+const KeepAlive = require('./lib/keepalive');
 
 class TeamspeakQuery extends EventEmitter {
 
@@ -41,9 +42,14 @@ class TeamspeakQuery extends EventEmitter {
       'enable': connectOptions.host !== '127.0.0.1' && connectOptions.host !== 'localhost'
     });
 
+    this.keepalive = new KeepAlive(() => this.send('version'));
+    this.keepalive.enable(false);
+
     sock.connect(connectOptions);
 
     sock.on('connect', () => {
+      this.keepalive.enable(true);
+
       this.carrier = carrier.carry(sock);
       this.carrier.on('line', this.handleLine.bind(this));
     });
@@ -73,6 +79,8 @@ class TeamspeakQuery extends EventEmitter {
   checkQueue() {
     this.throttle.run(() => {
       if(!this._current && this.queue.length) {
+        this.keepalive.interrupt();
+
         this._current = this.queue.shift();
         this.sock.write(this._current.cmd + '\n');
       }

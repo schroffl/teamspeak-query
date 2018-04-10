@@ -34,7 +34,6 @@ The constructor takes 3 parameters. If you want to make use of the `connect` opt
 
 **INFO**: The raw socket can be accessed via the instance's `sock` property.
 
-
 ## Sending Commands
 #### TeamspeakQuery.send(cmd, params?, ...flags?)
 Sends a command to the server and returns a Promise that resolves the response or rejects if something went wrong.
@@ -45,6 +44,14 @@ There are 2 ways, which can also be mixed, to specify parameters for the command
 You can also use it to set flags, e.g. `query.send('clientlist', '-uid')`.
 
 If you want your response to be an array, e.g. for commands like `clientlist`, take a look at [Issue #3](https://github.com/schroffl/teamspeak-query/issues/3#issuecomment-359252099).
+
+## Keep-Alive
+A keep-alive mechanism is implemented to prevent the server from closing the connection after inactivity. It basically just sends a `version` command every few minutes (This doesn't require authentication and has a very small overhead).
+If you want to tune its parameters, you can access the `keepalive` property of your `TeamspeakQuery` instance:
+```javascript
+query.keepalive.enable(true); // true => enable, false => disable, (default: true)
+query.keepalive.duration = 30000; // Send the command every 30 seconds, (default: 5 minutes)
+```
 
 ## Throttling
 Commands are being throttled by default if the host is not set to the local machine (`127.0.0.1` or `localhost`) in order to prevent a ban for flooding (see [Whitelisting and Blacklisting](http://media.teamspeak.com/ts3_literature/TeamSpeak%203%20Server%20Query%20Manual.pdf?#page=6) on page 6 in the specs).  
