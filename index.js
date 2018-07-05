@@ -130,7 +130,7 @@ class TeamspeakQuery extends EventEmitter {
    *                       if parsing fails.
    */
   static parse(str) {
-    let parsed = str.match(/(^error|^notify\w+|\w+=[^\s\|]+)/gi);
+    let parsed = str.match(/(^error|^notify\w+|\w+(=[^\s\|]+)?)/gi);
 
     if(parsed) {
       let resType = parsed[0].indexOf('=') === -1 ? parsed.shift() : null, // Only shift if the server responds with 'error' or 'notify'
@@ -140,6 +140,11 @@ class TeamspeakQuery extends EventEmitter {
         let index = v.indexOf('='),
             key = v.substring(0, index),
             value = TeamspeakQuery.unescape( v.substring(index + 1) );
+
+        if(index === -1) {
+          key = value;
+          value = undefined;
+        }
 
         if(key in params) {
           if(type(params[key]) !== 'array') 
