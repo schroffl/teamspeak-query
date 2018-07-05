@@ -25,9 +25,9 @@ class TeamspeakQuery extends EventEmitter {
 
     let sock = this.sock = new net.Socket(),
         connectOptions = Object.assign({ }, options, {
-          'host': '127.0.0.1',
-          'port': 10011
-        }, { host, port });
+          'host': host || '127.0.0.1',
+          'port': port || 10011
+        });
 
     this.queue = [ ];
     this._current = null;
