@@ -23,6 +23,7 @@
   "dependencies": {
     "carrier": "^0.3.0",
     "eventemitter2": "^1.0.3",
+    "ssh2": "^0.6.1",
     "type-of": "^2.0.1"
   },
   "devDependencies": {
