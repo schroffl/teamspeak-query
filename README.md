@@ -23,14 +23,14 @@ $ npm install teamspeak-query
 ```
 **Upgrading**: If you are upgrading to a newer version of `teamspeak-query`, take a look at [the changelog](https://github.com/schroffl/teamspeak-query/releases) to find out what needs to be done on your side. I will try to keep this process as simple as possible with future releases.
 
-## Constructor
-The constructor takes 3 parameters. If you want to make use of the `connect` options you have to specify host and port.
+## TeamspeakQuery.Raw
+The constructor takes a single object with some options.
 
-| Name    | Default     | Description                                     |
-| ------- | ----------- | ----------------------------------------------- |
-| host    | `127.0.0.1` | The ip of the server                            |
-| port    | `10011`     | The query port of the server                    |
-| options | `{ }`       | Any options that should be passed to [`net.Socket.connect`](https://nodejs.org/api/net.html#net_socket_connect_options_connectlistener) |
+| Name         | Default     | Description                         |
+| ------------ | ----------- | ----------------------------------- |
+| options      | `{}`        | Passed to [`net.Socket.connect`](https://nodejs.org/api/net.html#net_socket_connect_options_connectlistener) |
+| options.host | `127.0.0.1` | The ip of the server                |
+| options.port | `10011`     | The query port of the server        |
 
 The underlying TCP socket can be accessed via the `sock` property.
 
