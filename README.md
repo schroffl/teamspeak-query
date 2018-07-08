@@ -64,13 +64,13 @@ query.on('cliententerview', data =>
 ```
 
 ## Sending Commands
-#### TeamspeakQuery.send(cmd, params?, ...flags?)
+#### TeamspeakQuery.send(cmd, params?, ...arguments?)
 Sends a command to the server and returns a Promise that resolves the response or rejects if something went wrong.
 
 There are 2 ways, which can also be mixed, to specify parameters for the command:
 * **params**: An object, e.g. `{ 'parameter': 'value', 'x': 42 }`.
-* **flags**: Plain arguments passed to the function, e.g. `query.send('login', 'username', 'password')`.  
-You can also use it to set flags, e.g. `query.send('clientlist', '-uid')`.
+* **arguments**: Plain arguments passed to the function, e.g. `query.send('login', 'username', 'password')`.
+You can also use it to set flags, e.g. `query.send('clientlist', '-uid', '-ip')`.
 
 If you want your response to be an array, e.g. for commands like `clientlist`, take a look at [Issue #3](https://github.com/schroffl/teamspeak-query/issues/3#issuecomment-359252099).
 
@@ -83,9 +83,9 @@ query.keepalive.duration = 30000; // Send the command every 30 seconds, (default
 ```
 
 ## Throttling
-Commands are being throttled by default if the host is not set to the local machine (`127.0.0.1` or `localhost`) in order to prevent a ban for flooding (see [Whitelisting and Blacklisting](http://media.teamspeak.com/ts3_literature/TeamSpeak%203%20Server%20Query%20Manual.pdf?#page=6) on page 6 in the specs).  
-The instance of [lib/throttle.js](lib/throttle.js) can be accessed via `TeamspeakQuery.throttle`.  
-If you want to disable throttling, you can do it like this: `TeamspeakQuery.throttle.set('enable', false)`.
+Commands are being throttled by default to prevent a ban for flooding (see [Whitelisting and Blacklisting](http://media.teamspeak.com/ts3_literature/TeamSpeak%203%20Server%20Query%20Manual.pdf?#page=6) on page 6 in the specs).
+The instance of [lib/throttle.js](lib/throttle.js) can be accessed via `query.throttle`.
+If you want to disable throttling, you can do it like this: `query.throttle.set('enable', false)`.
 
 ## File Handling
 For interacting with files in Teamspeak channels, you can use the [`teamspeak-filesystem package`](https://github.com/schroffl/teamspeak-filesystem).
