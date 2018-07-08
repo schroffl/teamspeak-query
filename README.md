@@ -1,9 +1,9 @@
 # teamspeak-query [![npm version](https://badge.fury.io/js/teamspeak-query.svg)](https://badge.fury.io/js/teamspeak-query)
 A small, promise-based library for talking to your Teamspeak-Server via the [Teamspeak Server Query](http://media.teamspeak.com/ts3_literature/TeamSpeak%203%20Server%20Query%20Manual.pdf). See for yourself:
-
+<a name="usage-example"></a>
 ```javascript
 const TeamspeakQuery = require('teamspeak-query');
-const query = new TeamspeakQuery('127.0.0.1', 10011);
+const query = new TeamspeakQuery.Raw();
 
 query.send('login', 'serveradmin', 'changeme')
   .then(() => query.send('use', 1))
@@ -32,7 +32,36 @@ The constructor takes 3 parameters. If you want to make use of the `connect` opt
 | port    | `10011`     | The query port of the server                    |
 | options | `{ }`       | Any options that should be passed to [`net.Socket.connect`](https://nodejs.org/api/net.html#net_socket_connect_options_connectlistener) |
 
-**INFO**: The raw socket can be accessed via the instance's `sock` property.
+The underlying TCP socket can be accessed via the `sock` property.
+
+## TeamspeakQuery.SSH
+When using SSH you won't need to authenticate via the `login`-command, because, unlike with `TeamspeakQuery.Raw`,
+this is done when establishing the connection.
+
+| Name         | Default     | Description                         |
+| ------------ | ----------- | ----------------------------------- |
+| options      | `{}`        | Passed to [`ssh2.Client.connect`](https://www.npmjs.com/package/ssh2#client-methods) |
+| options.host | `127.0.0.1` | The ip of the server                |
+| options.port | `10011`     | The query port of the server        |
+| options.username | none    | The username                        |
+| options.password | none    | The password                        |
+
+The underlying [ssh2.Client](https://www.npmjs.com/package/ssh2#client) instance can be accessed via the `client` property.
+
+[The first Example](#usage-example), but via SSH:
+
+```javascript
+const query = new TeamspeakQuery.SSH({ username: 'serveradmin', password: 'changeme' });
+
+// We can omit the login command
+query.send('use', 1)
+  .then(() => query.send('servernotifyregister', { 'event': 'server' }))
+  .then(() => console.log('Done! Everything went fine'))
+  .catch(err => console.error('An error occured:', err))
+
+query.on('cliententerview', data =>
+  console.log(data.client_nickname, 'connected') );
+```
 
 ## Sending Commands
 #### TeamspeakQuery.send(cmd, params?, ...flags?)
