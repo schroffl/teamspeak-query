@@ -1,7 +1,7 @@
 'use strict';
 
 const expect = require('chai').expect;
-const TeamspeakQuery = require('..');
+const TeamspeakQuery = require('../lib/base');
 
 let testString = 'notifytextmessage targetmode=3 msg=x=y=z invokerid=2 invokername=schroffl invokeruid=3ZLOUe2rnjkorZfn98EdKyadVV4=';
 
