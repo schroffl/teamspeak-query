@@ -77,10 +77,10 @@ If you want your response to be an array, e.g. for commands like `clientlist`, t
 ## Keep-Alive
 A keep-alive mechanism is implemented to prevent the server from closing the connection after inactivity. It basically just sends a `version` command every few minutes (This doesn't require authentication and has a very small overhead).
 If you want to tune its parameters, you can access the `keepalive` property of your `TeamspeakQuery` instance:
-```javascript
-query.keepalive.enable(true); // true => enable, false => disable, (default: true)
-query.keepalive.duration = 30000; // Send the command every 30 seconds, (default: 5 minutes)
-```
+  - Enable: `query.keepalive.enable()`
+  - Disable: `query.keepalive.disable()`
+  - Set the interval to `x` seconds: `query.keepalive.setDuration(x)`  
+    The default value is 5 minutes (300 seconds).
 
 ## Throttling
 Commands are being throttled by default to prevent a ban for flooding (see [Whitelisting and Blacklisting](http://media.teamspeak.com/ts3_literature/TeamSpeak%203%20Server%20Query%20Manual.pdf?#page=6) on page 6 in the specs).
