@@ -80,7 +80,7 @@ If you want to tune its parameters, you can access the `keepalive` property of y
   - Enable: `query.keepalive.enable()`
   - Disable: `query.keepalive.disable()`
   - Set the interval to `x` seconds: `query.keepalive.setDuration(x)`  
-    The default value is 5 minutes (300 seconds).
+    The default value is 4 minutes (240 seconds, see [#17](https://github.com/schroffl/teamspeak-query/issues/17#issuecomment-420924876) for more detail).
 
 ## Throttling
 Commands are being throttled by default to prevent a ban for flooding (see [Whitelisting and Blacklisting](http://media.teamspeak.com/ts3_literature/TeamSpeak%203%20Server%20Query%20Manual.pdf?#page=6) on page 6 in the specs).
