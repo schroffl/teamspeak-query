@@ -74,6 +74,18 @@ You can also use it to set flags, e.g. `query.send('clientlist', '-uid', '-ip')`
 
 If you want your response to be an array, e.g. for commands like `clientlist`, take a look at [Issue #3](https://github.com/schroffl/teamspeak-query/issues/3#issuecomment-359252099).
 
+## Disconnecting
+Once you are done with everything you should call the disconnect method to release any resources that are required for keeping the connection open. This includes things like the keepalive loop.
+
+**Example:**
+```javascript
+query.send('login', 'serveradmin', 'changeme')
+  .then(() => query.send('use', 1))
+  .then(() => query.send('clientlist'))
+  .then(() => query.disconnect())
+  .catch(console.error);
+```
+
 ## Keep-Alive
 A keep-alive mechanism is implemented to prevent the server from closing the connection after inactivity. It basically just sends a `version` command every few minutes (This doesn't require authentication and has a very small overhead).
 If you want to tune its parameters, you can access the `keepalive` property of your `TeamspeakQuery` instance:
